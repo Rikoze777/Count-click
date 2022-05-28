@@ -4,6 +4,10 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 
 
+def parsed_link(url):
+    return f"{parsed_link(url).netlok}+ {parsed_link(url).path}"
+
+
 def shorten_link(url):
     header = {
         "Authorization": BITLY_TOKEN,
@@ -27,8 +31,7 @@ def count_clicks(link):
     params = {
         "unit": "month"
     }
-    parsed_result = urlparse(link)
-    link_id = parsed_result.netloc + parsed_result.path
+    link_id = parsed_link(link)
     response = requests.get(
         "https://api-ssl.bitly.com/v4/bitlinks/{}/clicks/summary"
         .format(link_id), 
@@ -43,8 +46,7 @@ def is_bitlink(url):
     header = {
         "Authorization": BITLY_TOKEN
     }
-    parsed_url = urlparse(url)
-    url_id = parsed_url.netloc + parsed_url.path
+    url_id = parsed_link(url)
     response = requests.get(
         "https://api-ssl.bitly.com/v4/bitlinks/{}".format(url_id),
         headers=header)
