@@ -36,10 +36,9 @@ def count_clicks(link):
     link_id = parsed_result.netloc + parsed_result.path
     response = requests.get(
         "https://api-ssl.bitly.com/v4/bitlinks/{}/clicks/summary"
-        .format(link_id),
-        params=params,
-        headers=header,
-        )
+        .format(link_id), 
+        params=params, 
+        headers=header)
     response.raise_for_status()
     count_response = response.json()
     if 'total_clicks' in count_response.keys():
