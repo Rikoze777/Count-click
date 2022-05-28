@@ -60,8 +60,8 @@ def is_bitlink(url):
 def main():
 
     url = input("Input the url: ")
-    is_bit = is_bitlink(url)
-    if is_bit:
+    is_bitly_link = is_bitlink(url)
+    if is_bitly_link:
         try:
             counter = count_clicks(url)
             print('Кликов', counter)
