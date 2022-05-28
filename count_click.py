@@ -3,8 +3,6 @@ import os
 from urllib.parse import urlparse
 from dotenv import load_dotenv
 
-BITLY_TOKEN = os.getenv("TOKEN")
-
 
 def shorten_link(url):
     header = {
@@ -73,4 +71,5 @@ def main():
 
 if __name__ == '__main__':
     load_dotenv()
+    BITLY_TOKEN = os.getenv("TOKEN")
     main()
