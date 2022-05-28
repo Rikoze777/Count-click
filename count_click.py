@@ -18,9 +18,7 @@ def shorten_link(url):
         "https://api-ssl.bitly.com/v4/shorten", json=params, headers=header)
     response.raise_for_status()
     short = response.json()
-    if 'link' in short.keys():
-        bitlink = short['link']
-        return bitlink
+    return short['link']
 
 
 def count_clicks(link):
@@ -40,9 +38,7 @@ def count_clicks(link):
         headers=header)
     response.raise_for_status()
     count_response = response.json()
-    if 'total_clicks' in count_response.keys():
-        clicks = count_response['total_clicks']
-        return clicks
+    return count_response['total_clicks']
 
 
 def is_bitlink(url):
