@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 
 def parsed_link(url):
-    return f"{parsed_link(url).netlok}+ {parsed_link(url).path}"
+    return f"{urlparse(url).netloc}+ {urlparse(url).path}"
 
 
 def shorten_link(url):
