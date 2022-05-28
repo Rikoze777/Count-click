@@ -3,13 +3,12 @@ import os
 from urllib.parse import urlparse
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv("TOKEN")
+BITLY_TOKEN = os.getenv("TOKEN")
 
 
 def shorten_link(url):
     header = {
-        "Authorization": TOKEN,
+        "Authorization": BITLY_TOKEN,
         "Content-Type": "application/json"
     }
     params = {
@@ -26,7 +25,7 @@ def shorten_link(url):
 
 def count_clicks(link):
     header = {
-        "Authorization": TOKEN,
+        "Authorization": BITLY_TOKEN,
         "Content-Type": "application/json"
     }
     params = {
@@ -48,7 +47,7 @@ def count_clicks(link):
 
 def is_bitlink(url):
     header = {
-        "Authorization": TOKEN
+        "Authorization": BITLY_TOKEN
     }
     parsed_url = urlparse(url)
     url_id = parsed_url.netloc + parsed_url.path
