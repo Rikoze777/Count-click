@@ -42,9 +42,9 @@ def count_clicks(link):
     return count_response['total_clicks']
 
 
-def is_bitlink(url):
+def is_bitlink(url, token):
     header = {
-        "Authorization": BITLY_TOKEN
+        "Authorization": token
     }
     url_id = parsed_link(url)
     response = requests.get(
@@ -56,7 +56,7 @@ def is_bitlink(url):
 def main():
 
     url = input("Input the url: ")
-    is_bitly_link = is_bitlink(url)
+    is_bitly_link = is_bitlink(url,BITLY_TOKEN)
     if is_bitly_link:
         try:
             counter = count_clicks(url)
