@@ -8,6 +8,7 @@ def parse_link(url):
     parts = urlparse(url)
     return f"{parts.netloc}+ {parts.path}"
 
+
 def shorten_link(url, token):
     header = {
         "Authorization": token,
@@ -19,8 +20,8 @@ def shorten_link(url, token):
     response = requests.post(
         "https://api-ssl.bitly.com/v4/shorten", json=params, headers=header)
     response.raise_for_status()
-    short = response.json()
-    return short['link']
+    response_list = response.json()
+    return response_list['link']
 
 
 def count_clicks(link, token):
@@ -34,12 +35,12 @@ def count_clicks(link, token):
     link_id = parse_link(link)
     response = requests.get(
         "https://api-ssl.bitly.com/v4/bitlinks/{}/clicks/summary"
-        .format(link_id), 
-        params=params, 
+        .format(link_id),
+        params=params,
         headers=header)
     response.raise_for_status()
-    count_response = response.json()
-    return count_response['total_clicks']
+    response_list = response.json()
+    return response_list['total_clicks']
 
 
 def is_bitlink(url, token):
@@ -66,12 +67,11 @@ def main():
             print("Can't get data from server")
     else:
         try:
-            data = shorten_link(url, BITLY_TOKEN)
-            print('Битлинк', data)
+            count_clicks = shorten_link(url, BITLY_TOKEN)
+            print('Битлинк', count_clicks)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
 
 
 if __name__ == '__main__':
     main()
-
