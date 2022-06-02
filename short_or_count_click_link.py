@@ -7,10 +7,9 @@ from dotenv import load_dotenv
 def parsed_link(url):
     return f"{urlparse(url).netloc}+ {urlparse(url).path}"
 
-
-def shorten_link(url):
+def shorten_link(url, token):
     header = {
-        "Authorization": BITLY_TOKEN,
+        "Authorization": token,
         "Content-Type": "application/json"
     }
     params = {
@@ -23,9 +22,9 @@ def shorten_link(url):
     return short['link']
 
 
-def count_clicks(link):
+def count_clicks(link, token):
     header = {
-        "Authorization": BITLY_TOKEN,
+        "Authorization": token,
         "Content-Type": "application/json"
     }
     params = {
@@ -57,16 +56,16 @@ def main():
     load_dotenv()
     BITLY_TOKEN = os.getenv("access_token")
     url = input("Input the url: ")
-    is_bitly_link = is_bitlink(url,BITLY_TOKEN)
+    is_bitly_link = is_bitlink(url, BITLY_TOKEN)
     if is_bitly_link:
         try:
-            counter = count_clicks(url)
+            counter = count_clicks(url, BITLY_TOKEN)
             print('Кликов', counter)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
     else:
         try:
-            data = shorten_link(url)
+            data = shorten_link(url, BITLY_TOKEN)
             print('Битлинк', data)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
