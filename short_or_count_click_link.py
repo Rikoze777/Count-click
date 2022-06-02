@@ -54,7 +54,8 @@ def is_bitlink(url, token):
 
 
 def main():
-
+    load_dotenv()
+    BITLY_TOKEN = os.getenv("access_token")
     url = input("Input the url: ")
     is_bitly_link = is_bitlink(url,BITLY_TOKEN)
     if is_bitly_link:
@@ -72,6 +73,5 @@ def main():
 
 
 if __name__ == '__main__':
-    load_dotenv()
-    BITLY_TOKEN = os.getenv("TOKEN")
     main()
+
