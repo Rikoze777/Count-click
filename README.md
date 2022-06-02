@@ -21,6 +21,8 @@ Python3 должен быть уже установлен.
 ```
 pip install -r requirements.txt
 ```
+### Пример успешного запуска
+![good work](/image/Снимок.png)
 
 ### Цель проекта
 
