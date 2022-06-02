@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 def parse_link(url):
     parts = urlparse(url)
-    return f"{parts.netloc}+ {parts.path}"
+    return f"{parts.netloc}{parts.path}"
 
 
 def shorten_link(url, token):
@@ -56,19 +56,19 @@ def is_bitlink(url, token):
 
 def main():
     load_dotenv()
-    BITLY_TOKEN = os.getenv("access_token")
+    BITLY_TOKEN = os.environ.get("access_token")
     url = input("Input the url: ")
     is_bitly_link = is_bitlink(url, BITLY_TOKEN)
     if is_bitly_link:
         try:
-            counter = count_clicks(url, BITLY_TOKEN)
-            print('Кликов', counter)
+            count_links = count_clicks(url, BITLY_TOKEN)
+            print('Кликов', count_links)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
     else:
         try:
-            count_clicks = shorten_link(url, BITLY_TOKEN)
-            print('Битлинк', count_clicks)
+            short_links = shorten_link(url, BITLY_TOKEN)
+            print('Битлинк', short_links)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
 
