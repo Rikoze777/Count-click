@@ -64,13 +64,13 @@ def main():
             count_links = count_clicks(url, bitly_token)
             print('Кликов', count_links)
         except requests.exceptions.HTTPError:
-            print("Can't get data from server")
+            print("Can't get click count")
     else:
         try:
             short_links = shorten_link(url, bitly_token)
             print('Битлинк', short_links)
         except requests.exceptions.HTTPError:
-            print("Can't get data from server")
+            print("The link is wrong")
 
 
 if __name__ == '__main__':
