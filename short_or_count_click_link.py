@@ -56,18 +56,18 @@ def is_bitlink(url, token):
 
 def main():
     load_dotenv()
-    BITLY_TOKEN = os.environ.get("access_token")
+    bitly_token = os.environ.get("ACCESS_TOKEN")
     url = input("Input the url: ")
-    is_bitly_link = is_bitlink(url, BITLY_TOKEN)
+    is_bitly_link = is_bitlink(url, bitly_token)
     if is_bitly_link:
         try:
-            count_links = count_clicks(url, BITLY_TOKEN)
+            count_links = count_clicks(url, bitly_token)
             print('Кликов', count_links)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
     else:
         try:
-            short_links = shorten_link(url, BITLY_TOKEN)
+            short_links = shorten_link(url, bitly_token)
             print('Битлинк', short_links)
         except requests.exceptions.HTTPError:
             print("Can't get data from server")
