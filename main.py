@@ -2,6 +2,16 @@ import requests
 import os
 from urllib.parse import urlparse
 from dotenv import load_dotenv
+import argparse
+import sys
+
+
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('url',
+                        type=str,
+                        help='<Required> url link')
+    return parser
 
 
 def parse_link(url):
@@ -57,18 +67,20 @@ def is_bitlink(url, token):
 def main():
     load_dotenv()
     bitly_token = os.environ.get("ACCESS_TOKEN")
-    url = input("Input the url: ")
+    parser = createParser()
+    namelink = parser.parse_args(sys.argv[1:])
+    url = namelink.url
     is_bitly_link = is_bitlink(url, bitly_token)
     if is_bitly_link:
         try:
             count_links = count_clicks(url, bitly_token)
-            print('Кликов', count_links)
+            print('Количество переходов по ссылке битли', count_links)
         except requests.exceptions.HTTPError:
             print("Can't get click count")
     else:
         try:
             short_links = shorten_link(url, bitly_token)
-            print('Битлинк', short_links)
+            print(short_links)
         except requests.exceptions.HTTPError:
             print("The link is wrong")
 
