@@ -6,7 +6,7 @@ import argparse
 import sys
 
 
-def createParser():
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('url',
                         type=str,
@@ -67,7 +67,7 @@ def is_bitlink(url, token):
 def main():
     load_dotenv()
     bitly_token = os.environ.get("ACCESS_TOKEN")
-    parser = createParser()
+    parser = create_parser()
     namelink = parser.parse_args(sys.argv[1:])
     url = namelink.url
     is_bitly_link = is_bitlink(url, bitly_token)
