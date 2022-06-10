@@ -66,7 +66,7 @@ def is_bitlink(url, token):
 
 def main():
     load_dotenv()
-    bitly_token = os.environ.get("ACCESS_TOKEN")
+    bitly_token = os.environ.get("BITLY_TOKEN")
     parser = create_parser()
     namelink = parser.parse_args(sys.argv[1:])
     url = namelink.url
