@@ -3,7 +3,6 @@ import os
 from urllib.parse import urlparse
 from dotenv import load_dotenv
 import argparse
-import sys
 
 
 def create_parser():
@@ -68,7 +67,7 @@ def main():
     load_dotenv()
     bitly_token = os.environ.get("BITLY_TOKEN")
     parser = create_parser()
-    url_link = parser.parse_args(sys.argv[1:])
+    url_link = parser.parse_args()
     url = url_link.url
     is_bitly_link = is_bitlink(url, bitly_token)
     if is_bitly_link:
