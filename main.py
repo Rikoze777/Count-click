@@ -7,9 +7,7 @@ import argparse
 
 def create_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('url',
-                        type=str,
-                        help='<Required> url link')
+    parser.add_argument('url', help='<Required> url link')
     return parser
 
 
